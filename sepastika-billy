@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billy | Your Digital Personal Assistant</title>
+<style>
+:root{--bg:#0b0d12;--card:#141821;--line:#232a38;--text:#e8ecf3;--muted:#8d97ab;--accent:#5eead4;--accent2:#818cf8;--bad:#f87171}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+section,footer{max-width:1000px;margin:0 auto;padding:56px 20px}
+h2{font-size:1.7rem;margin-bottom:8px;text-align:center}
+.sub{color:var(--muted);text-align:center;margin-bottom:32px}
+
+/* Hero */
+.hero{text-align:center;padding-top:80px}
+.avatar{width:96px;height:96px;margin:0 auto 18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 40px rgba(94,234,212,.25)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.4rem);letter-spacing:-1px}
+.badge{display:inline-block;margin:14px 0;padding:6px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:.9rem;color:var(--accent)}
+.tagline{max-width:620px;margin:0 auto;color:var(--muted);font-size:1.1rem}
+
+/* Problem & Solution */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+.box h3{margin-bottom:14px}
+.chaos{border-top:3px solid var(--bad)}
+.solution{border-top:3px solid var(--accent)}
+.box ul{list-style:none}
+.box li{padding:8px 0 8px 28px;position:relative;color:var(--muted);border-bottom:1px solid var(--line)}
+.box li:last-child{border-bottom:none}
+.chaos li::before{content:"✕";position:absolute;left:0;color:var(--bad)}
+.solution li::before{content:"✓";position:absolute;left:0;color:var(--accent)}
+
+/* Capabilities */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:.2s}
+.cap:hover{transform:translateY(-4px);border-color:var(--accent)}
+.cap .ic{font-size:2rem;margin-bottom:10px}
+.cap h3{margin-bottom:8px}
+.cap p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+.tag{display:inline-block;margin:0 6px 6px 0;padding:3px 10px;font-size:.78rem;border-radius:6px;background:#1c2230;color:var(--accent2)}
+
+/* Chat */
+.chat{max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.chat-head{padding:12px 18px;border-bottom:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+.chat-body{height:340px;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:.93rem;white-space:pre-line;animation:fade .3s}
+.msg.user{align-self:flex-end;background:var(--accent2);color:#0b0d12;border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:#1c2230;border-bottom-left-radius:4px}
+.typing{display:flex;gap:5px;align-self:flex-start;padding:12px 16px;background:#1c2230;border-radius:14px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.2s}
+.typing i:nth-child(3){animation-delay:.4s}
+.hint{color:var(--muted);text-align:center;font-size:.9rem;margin:auto}
+.btns{display:flex;flex-wrap:wrap;gap:10px;padding:14px 18px;border-top:1px solid var(--line)}
+.btns button{flex:1;min-width:150px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--text);cursor:pointer;font-size:.88rem;transition:.2s}
+.btns button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.btns button:disabled{opacity:.4;cursor:not-allowed}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+
+/* Footer */
+footer{text-align:center;border-top:1px solid var(--line)}
+.cta{display:inline-block;margin:18px 0 28px;padding:16px 38px;border-radius:12px;font-weight:700;font-size:1.05rem;text-decoration:none;color:#0b0d12;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 30px rgba(94,234,212,.25);transition:.2s}
+.cta:hover{transform:scale(1.05)}
+.credit{color:var(--muted);font-size:.85rem}
+
+@media(max-width:760px){.compare,.cards{grid-template-columns:1fr}section,footer{padding:40px 16px}}
+</style>
+</head>
+<body>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="avatar">🤖</div>
+  <h1>Billy</h1>
+  <div class="badge">🟢 Status: Active &amp; Ready 24/7</div>
+  <p class="tagline">Your personal assistant that manages meetings, sorts your email, and reminds you when it is time to eat.</p>
+</section>
+
+<!-- 2. PROBLEM & SOLUTION -->
+<section>
+  <h2>From Chaos to Control</h2>
+  <p class="sub">What slows you down, and how Billy fixes it.</p>
+  <div class="compare">
+    <div class="box chaos">
+      <h3>😵 The Chaos</h3>
+      <ul>
+        <li>Inbox full of emails. You must sort useful ones from junk by hand.</li>
+        <li>Email replies take too long to write.</li>
+        <li>Daily spending is not recorded. Monthly totals are unclear.</li>
+        <li>Fresh content ideas are hard to find. Viral trends move fast.</li>
+      </ul>
+    </div>
+    <div class="box solution">
+      <h3>✨ The Solution</h3>
+      <ul>
+        <li>Billy reads your Yahoo Mail, keeps what matters, and removes the rest.</li>
+        <li>Billy drafts replies. You approve before anything is sent.</li>
+        <li>Billy logs daily expenses and summarizes each month. It shows what to cut and what to increase.</li>
+        <li>Billy researches viral mindset and self-development content, then gives you new ideas.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. CORE CAPABILITIES -->
+<section>
+  <h2>Core Capabilities</h2>
+  <p class="sub">Three jobs Billy does every day.</p>
+  <div class="cards">
+    <div class="cap">
+      <div class="ic">📅</div>
+      <h3>Schedule &amp; Meal Guard</h3>
+      <p>Arranges meetings, avoids clashes, and warns you when your meal time is near.</p>
+      <span class="tag">Google Calendar</span>
+    </div>
+    <div class="cap">
+      <div class="ic">📧</div>
+      <h3>Smart Email Desk</h3>
+      <p>Sorts important emails, deletes junk, and drafts replies. Human-in-the-Loop approval keeps you in control.</p>
+      <span class="tag">Yahoo Mail</span><span class="tag">Human-in-the-Loop</span>
+    </div>
+    <div class="cap">
+      <div class="ic">💡</div>
+      <h3>Money &amp; Ideas Lab</h3>
+      <p>Tracks daily spending, builds monthly reports, and researches viral content for new ideas.</p>
+      <span class="tag">Google Sheets</span><span class="tag">Google Drive</span><span class="tag">Web Search</span>
+    </div>
+  </div>
+</section>
+
+<!-- 4. INTERACTIVE SIMULATION -->
+<section>
+  <h2>Try Billy Live</h2>
+  <p class="sub">Pick a scenario and watch Billy work.</p>
+  <div class="chat">
+    <div class="chat-head">💬 Chat with Billy (demo)</div>
+    <div class="chat-body" id="chat"><p class="hint" id="hint">Tap a scenario below to start.</p></div>
+    <div class="btns">
+      <button data-s="email">📧 Sort my inbox</button>
+      <button data-s="money">💰 Monthly expenses</button>
+      <button data-s="ideas">🔥 Viral content ideas</button>
+    </div>
+  </div>
+</section>
+
+<!-- 5. FOOTER & CTA -->
+<footer>
+  <h2>Want your own digital assistant?</h2>
+  <a class="cta" href="https://wa.me/6287774705100" target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+  <p class="credit">Built with AI · AI Builder Bootcamp Showcase</p>
+</footer>
+
+<script>
+const scenarios = {
+  email: {
+    user: "Billy, please check my inbox this morning.",
+    bot: "I scanned 48 new emails in Yahoo Mail:\n✅ 6 important (2 clients, 1 invoice, 3 meeting requests)\n🗑️ 42 junk or promo emails removed\n\nI drafted replies for the 2 client emails. Please review them before I send. Approve, edit, or reject?"
+  },
+  money: {
+    user: "Show me my spending summary for this month.",
+    bot: "Here is your summary from Google Sheets:\n🍽️ Food and drinks: Rp 3.200.000 (high, cut 15%)\n🚗 Transport: Rp 1.100.000\n📚 Learning: Rp 600.000 (good, add more)\n\nSuggestion: cook at home 3 more days a week and move the savings to learning. I saved the full report in Google Drive."
+  },
+  ideas: {
+    user: "Give me fresh content ideas about mindset.",
+    bot: "I searched the web for trending self-development posts. 3 ideas for you:\n1. \"The 5-minute rule that beats procrastination\"\n2. \"3 habits to start before 7 AM\"\n3. \"Why motivation fails and what works\"\n\nThese formats are getting high engagement this week. Want me to write captions?"
+  }
+};
+
+const chat = document.getElementById("chat");
+const buttons = document.querySelectorAll(".btns button");
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+function addMsg(text, who) {
+  const m = document.createElement("div");
+  m.className = "msg " + who;
+  m.textContent = text;
+  chat.appendChild(m);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+async function run(key) {
+  const s = scenarios[key];
+  buttons.forEach(b => b.disabled = true);
+  const hint = document.getElementById("hint");
+  if (hint) hint.remove();
+  chat.innerHTML = "";
+  addMsg(s.user, "user");
+  await wait(500);
+  const t = document.createElement("div");
+  t.className = "typing";
+  t.innerHTML = "<i></i><i></i><i></i>";
+  chat.appendChild(t);
+  chat.scrollTop = chat.scrollHeight;
+  await wait(1800);
+  t.remove();
+  addMsg(s.bot, "bot");
+  buttons.forEach(b => b.disabled = false);
+}
+
+buttons.forEach(b => b.addEventListener("click", () => run(b.dataset.s)));
+</script>
+</body>
+</html>
